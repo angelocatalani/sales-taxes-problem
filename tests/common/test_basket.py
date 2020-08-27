@@ -1,10 +1,10 @@
-from typing import List, Tuple
-from unittest.mock import MagicMock, patch
+from typing import List
+from unittest.mock import MagicMock
 
 import pytest
 
-from sales_taxes_problem.core import Basket
-from tests.core.helpers import BASKET_NUMBER, ItemTaxInfo
+from sales_taxes_problem.common.basket import Basket
+from tests.common.helpers import BASKET_NUMBER, ItemTaxInfo
 
 
 def test_basket_init() -> None:
