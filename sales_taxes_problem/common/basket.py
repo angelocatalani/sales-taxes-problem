@@ -1,6 +1,6 @@
 from typing import List
 
-from sales_taxes_problem.common import Item
+from sales_taxes_problem.common.item import Item
 
 
 class Basket:
