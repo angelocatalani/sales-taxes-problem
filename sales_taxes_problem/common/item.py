@@ -44,7 +44,7 @@ class Item(ABC):
 
     @property
     @abstractmethod
-    def tax_calculator(self) -> TaxCalculator:
+    def _tax_calculator(self) -> TaxCalculator:
         """
         The tax calculator to compute the Item's tax.
 
@@ -57,4 +57,4 @@ class Item(ABC):
         Compute the taxes to pay for this single Item rounded up to the nearest 0.05.
         """
 
-        return self.tax_calculator.compute_tax(item_name=self.name)
+        return self._tax_calculator.compute_tax(item_name=self.name)
