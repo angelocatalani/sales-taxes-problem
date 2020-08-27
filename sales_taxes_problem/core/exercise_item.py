@@ -1,4 +1,4 @@
-from decimal import ROUND_UP, Decimal
+from decimal import Decimal, ROUND_UP
 
 from sales_taxes_problem.common import Item, TaxCalculator
 
