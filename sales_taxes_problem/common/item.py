@@ -7,9 +7,12 @@ class TaxCalculator(ABC):
     """
 
     @abstractmethod
-    def compute_tax(self, item_name: str) -> float:
+    def compute_tax(self, item_name: str, item_price: float) -> float:
         """
-        Compute the taxes for the input Item's name rounded up to the nearest 0.05.
+        Compute the taxes for the input Item's name and price rounded up to the nearest 0.05.
+
+        :param item_name: the item's name
+        :param item_price: the item's price
 
         :return: the taxes for the item_name
         """
@@ -71,4 +74,4 @@ class Item(ABC):
         Compute the taxes to pay for this single Item rounded up to the nearest 0.05.
         """
 
-        return self._tax_calculator.compute_tax(item_name=self.name)
+        return self._tax_calculator.compute_tax(item_name=self.name, item_price=self.price)
