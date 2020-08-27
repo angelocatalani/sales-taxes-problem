@@ -1,6 +1,20 @@
 from abc import ABC, abstractmethod
 
-from sales_taxes_problem.common import TaxCalculator
+
+class TaxCalculator(ABC):
+    """
+    Computes the taxes under a given taxation system.
+    """
+
+    @abstractmethod
+    def compute_tax(self, item_name: str) -> float:
+        """
+        Compute the taxes for the input Item's name rounded up to the nearest 0.05.
+
+        :return: the taxes for the item_name
+        """
+
+        raise NotImplementedError()  # pragma: no cover
 
 
 class Item(ABC):
@@ -52,7 +66,7 @@ class Item(ABC):
         """
         raise NotImplementedError()  # pragma: no cover
 
-    def get_taxed_price(self) -> float:
+    def get_taxes(self) -> float:
         """
         Compute the taxes to pay for this single Item rounded up to the nearest 0.05.
         """
