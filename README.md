@@ -78,7 +78,75 @@ Total: 98.38
 **IMPORTANT:**  Implement the requirements focusing on **writing the best code** you can produce.
 
 ### Solution
-TODO
+#### Input Analysis
+The input basket has the following format:
+```
+Input [input_number]:
+[quantity] [item] at [price] 
+[quantity] [item] at [price] 
+...
+
+```
+The ```[item]``` must be classified into:
+- Basic sales taxable or not
+- Import duty taxable or not
+
+The ```[price] ``` is referred to the single item even if the ```[quantity]``` 
+is greater than one.
+
+#### Output Analysis
+The output recipe has the following format:
+```
+Output [output_number]:
+[quantity] [item]: [price] 
+[quantity] [item]: [price] 
+...
+Sales Taxes: [price]
+Total: [price]
+```
+The ```[output_number]``` is the same of ```[input_number]``` it refers to.
+
+The ```[price] ``` is cumulative for the given ```[item]``` 
+and rounded up to the nearest 0.05.
+
+#### Class Diagram
+The `Item` interface abstracts the single item inside a shopping basket.
+
+The `Item`'s state is defined by:
+- the quantity
+- the name
+- the unitary price
+
+The `Item` is in charge of:
+- computing the tax to pay
+
+To make the `Item` resilient to tax rate changes and flexible to new taxes,
+the tax computation is delegated to the `TaxCalculator` interface.
+
+The `TaxCalculator` interface is in charge of:
+- classifying the item
+- computing the tax for that item
+
+The `Basket` interface abstracts the shopping basket.
+
+The `Basket`'s state is defined by:
+- the basket number
+- the list of items
+
+The `Basket` is in charge of:
+- computing the total price for all the basket's items
+- computing the total taxes for all the basket's items
+
+
+
+
+
+
+
+
+
+
+
 
 ### Installation
 To install and configure `poetry` run 
