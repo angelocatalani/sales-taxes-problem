@@ -127,7 +127,7 @@ The `TaxCalculator` interface is in charge of:
 - classifying the item
 - computing the tax for that item
 
-The `Basket` is a concrete class since it uses only abstractions.
+The `Basket` is a concrete class since it already uses only abstractions.
 It represents the shopping basket.
 
 The `Basket`'s state is defined by:
@@ -138,16 +138,19 @@ The `Basket` is in charge of:
 - computing the total price for all the basket's items
 - computing the total taxes for all the basket's items
 
+The `Parser` is an interface that is in charge of:
+- deserializing the text representing the receipt details into a tuple of `Bakset`
+- serializing the tuple of `Basket` into the expected output
+We decided to make it abstract because so that the code is resilient 
+to changes in the recipe text format.
 
+The `ExerciseItem` is the concrete implementation of the`Item` under the exercise taxation system.
 
+The `ExerciseTaxCalculator` is the concrete implementation of the `TaxCalculator`
+under the exercise taxation system.
 
-
-
-
-
-
-
-
+The `ExerciseParser` is the concrete implementation of the `Parser` that uses items of type:
+`ExerciseItems`and assumes the recipe format of the exercise.
 
 ### Installation
 To install and configure `poetry` run 
