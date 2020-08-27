@@ -127,7 +127,8 @@ The `TaxCalculator` interface is in charge of:
 - classifying the item
 - computing the tax for that item
 
-The `Basket` interface abstracts the shopping basket.
+The `Basket` is a concrete class since it uses only abstractions.
+It represents the shopping basket.
 
 The `Basket`'s state is defined by:
 - the basket number
