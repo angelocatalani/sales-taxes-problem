@@ -33,7 +33,7 @@ class Basket:
         """
         total_taxes = 0.0
         for item in self._items:
-            total_taxes += item.get_taxed_price() * item.quantity
+            total_taxes += item.get_taxes() * item.quantity
         return total_taxes
 
     def get_final_price(self) -> float:
