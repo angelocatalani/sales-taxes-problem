@@ -46,12 +46,12 @@ jobs:
       run:  poetry run black --check .
 
     - name: Run MyPy
-      run: poetry run mypy --strict ./sales-taxes-problem
+      run: poetry run mypy --strict ./sales_taxes_problem
 
     - name: Run isort
       run: poetry run isort -c
 
     - name: Run Pytest with coverage threshold
       # FIXME: increase the code coverage
-      run: poetry run pytest --cov-fail-under=0 --cov=./sales-taxes-problem
+      run: poetry run pytest --cov-fail-under=0 --cov=./sales_taxes_problem
       
