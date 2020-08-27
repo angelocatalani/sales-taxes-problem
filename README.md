@@ -1,11 +1,17 @@
 # Sales taxes problem
+[![Python](https://img.shields.io/badge/python-3.8-informational)](https://docs.python.org/3/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Actions Status](https://github.com/anjelo95/sales-taxes-problem/.github/workflows/main.yml/badge.svg)](https://github.com/anjelo95/sales-taxes-problem/actions)
+
 This problem requires some kind of input. You are free to implement any mechanism for feeding input into your solution (for example, using hard coded data within a unit test). You should provide sufficient evidence that your solution is complete by, as a minimum, indicating that it works correctly against the supplied test data.
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [Problem](#PROBLEM:-SALES-TAXES)
-* [Requirements](#General-requirements)
+* [General requirements](#General-requirements)
 * [Solution](#solution)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -73,7 +79,23 @@ Total: 98.38
 TODO
 
 ### Installation
-TODO
+To install and configure `poetry` run 
+```shell script
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+poetry config virtualenvs.in-project true
+```
+
+Then, install dependencies:
+```shell script
+poetry install
+```
 
 ### Usage
 TODO
+
+### Contributing
+To contribute, please open a PR based on the `staging` branch, make sure that the new code is properly tested 
+and all the steps performed in the CI pipeline are completed successfully. 
+
+We follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).
+
