@@ -46,7 +46,9 @@ jobs:
       run:  poetry run black --check .
 
     - name: Run MyPy
-      run: poetry run mypy --strict ./sales_taxes_problem
+      run: |
+        poetry run mypy --strict ./sales_taxes_problem
+        poetry run mypy --strict ./tests
 
     - name: Run isort
       run: poetry run isort -c
