@@ -37,7 +37,6 @@ class Basket:
         return total_taxes
 
     def get_final_price(self) -> float:
-
         """
         Get the final price for this Basket.
 
