@@ -1,6 +1,6 @@
 from decimal import Decimal, ROUND_UP
 
-from sales_taxes_problem.common import Item, TaxCalculator
+from sales_taxes_problem.common.item import Item, TaxCalculator
 
 
 class ExerciseTaxCalculator(TaxCalculator):
