@@ -15,6 +15,8 @@ This problem requires some kind of input. You are free to implement any mechanis
 * [Solution](#solution)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Contributing](#contributing)
+
 
 
 ### PROBLEM: SALES TAXES
