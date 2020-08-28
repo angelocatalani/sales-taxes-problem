@@ -1,6 +1,10 @@
 from typing import NamedTuple, Optional
 
 BASKET_NUMBER = 1
+ITEM_STRING_REPRESENTATION = "1 music CD: 16.49"
+ITEM_TAXED_PRICE = 16.49
+ITEM_TAXES = 1.50
+EXPECTED_BASKET_FORMAT = f"\nOutput 1:\n{ITEM_STRING_REPRESENTATION}\nSales Taxes: {ITEM_TAXES}\nTotal: {ITEM_TAXED_PRICE}\n"
 
 
 class ItemTaxInfo(NamedTuple):
