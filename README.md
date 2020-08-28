@@ -137,10 +137,11 @@ The `Basket`'s state is defined by:
 The `Basket` is in charge of:
 - computing the total price for all the basket's items
 - computing the total taxes for all the basket's items
+- representing the Basket following the exercise recipe output
 
 The `Parser` is an interface that is in charge of:
 - deserializing the text representing the receipt details into a tuple of `Bakset`
-- serializing the tuple of `Basket` into the expected output
+- serializing the tuple of `Basket` into the expected output.
 We decided to make it abstract because so that the code is resilient 
 to changes in the recipe text format.
 
@@ -165,7 +166,10 @@ poetry install
 ```
 
 ### Usage
-TODO
+To run tests:
+```shell script
+poetry run pytest
+```
 
 ### Contributing
 To contribute, please open a PR based on the `staging` branch, make sure that the new code is properly tested 
