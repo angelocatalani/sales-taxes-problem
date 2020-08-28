@@ -39,27 +39,6 @@ class Item(ABC):
         self._price = price
 
     @property
-    def quantity(self) -> int:
-        """
-        Read-only getter for the quantity attribute.
-        """
-        return self._quantity
-
-    @property
-    def name(self) -> str:
-        """
-        Read-only getter for the name attribute.
-        """
-        return self._name
-
-    @property
-    def price(self) -> float:
-        """
-        Read-only getter for the price attribute.
-        """
-        return self._price
-
-    @property
     @abstractmethod
     def _tax_calculator(self) -> TaxCalculator:
         """
@@ -71,7 +50,19 @@ class Item(ABC):
 
     def get_taxes(self) -> float:
         """
-        Compute the taxes to pay for this single Item rounded up to the nearest 0.05.
+        Compute the taxes to pay for this Item rounded up to the nearest 0.05.
+        The taxes are computes for the entire Item quantity.
         """
 
-        return self._tax_calculator.compute_tax(item_name=self.name, item_price=self.price)
+        return (
+            self._tax_calculator.compute_tax(item_name=self._name, item_price=self._price)
+            * self._quantity
+        )
+
+    @property
+    def taxed_price(self) -> float:
+        """
+        Compute the taxed price for this Item.
+        The taxed price is computed for the entire Item quantity.
+        """
+        return self.get_taxes() + self._price * self._quantity

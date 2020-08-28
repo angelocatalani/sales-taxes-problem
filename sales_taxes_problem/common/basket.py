@@ -33,7 +33,7 @@ class Basket:
         """
         total_taxes = 0.0
         for item in self._items:
-            total_taxes += item.get_taxes() * item.quantity
+            total_taxes += item.get_taxes()
         return total_taxes
 
     def get_final_price(self) -> float:
@@ -42,7 +42,7 @@ class Basket:
 
         :return: the final price
         """
-        non_taxed_price = 0.0
+        final_price = 0.0
         for item in self._items:
-            non_taxed_price += item.price * item.quantity
-        return self.get_total_taxes() + non_taxed_price
+            final_price += item.taxed_price
+        return final_price
