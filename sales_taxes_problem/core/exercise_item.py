@@ -1,6 +1,7 @@
 from sales_taxes_problem.common.item import Item
 from sales_taxes_problem.core.exercise_tax_calculator import ExerciseTaxCalculator
 
+
 class ExerciseItem(Item):
     """
     Represents the Item under this exercise taxation system.
