@@ -1,7 +1,7 @@
 import pytest
 
-from sales_taxes_problem.core import ExerciseParser
-from tests.core.helpers import ReceiptInfo, load_test_receipts
+from sales_taxes_problem.core import ExerciseParser, MalformedReceiptError
+from tests.core.helpers import ReceiptInfo, load_correct_receipts, load_malformed_receipts
 
 
 def test_exercise_parser_init() -> None:
@@ -12,7 +12,7 @@ def test_exercise_parser_init() -> None:
 
 
 @pytest.mark.parametrize(
-    "receipt_info", load_test_receipts(),
+    "receipt_info", load_correct_receipts(),
 )  # type: ignore[misc]
 def test_exercise_parser_output_receipt(receipt_info: ReceiptInfo) -> None:
     """
@@ -25,7 +25,7 @@ def test_exercise_parser_output_receipt(receipt_info: ReceiptInfo) -> None:
 
 
 @pytest.mark.parametrize(
-    "receipt_info", load_test_receipts(),
+    "receipt_info", load_correct_receipts(),
 )  # type: ignore[misc]
 def test_exercise_parser_parse_receipt(receipt_info: ReceiptInfo) -> None:
     """
@@ -37,3 +37,16 @@ def test_exercise_parser_parse_receipt(receipt_info: ReceiptInfo) -> None:
     assert len(actual_baskets) == len(receipt_info.baskets)
     for i in range(len(actual_baskets)):
         assert actual_baskets[i] == receipt_info.baskets[i]
+
+
+@pytest.mark.parametrize(
+    "malformed_receipt", load_malformed_receipts(),
+)  # type: ignore[misc]
+def test_exercise_parser_raise_exception(malformed_receipt: str) -> None:
+    """
+    Test the receipt is converted to the correct Baskets.
+    """
+
+    ex_parser = ExerciseParser()
+    with pytest.raises(MalformedReceiptError):
+        ex_parser.parse_receipt(receipt=malformed_receipt)
