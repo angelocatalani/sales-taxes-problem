@@ -32,8 +32,7 @@ def test_basket_get_total_taxes(items_info: List[ItemTaxInfo], total_taxes: int)
     basket = Basket(number=BASKET_NUMBER)
     for item_info in items_info:
         mocked_item = MagicMock()
-        mocked_item.get_taxes = MagicMock(return_value=item_info.taxes)
-        mocked_item.quantity = item_info.quantity
+        mocked_item.get_taxes = MagicMock(return_value=item_info.taxes * item_info.quantity)
         basket.add_item(item=mocked_item)
 
     assert basket.get_total_taxes() == total_taxes
@@ -60,9 +59,7 @@ def test_basket_get_final_price(items_info: List[ItemTaxInfo], final_price: int)
     basket = Basket(number=BASKET_NUMBER)
     for item_info in items_info:
         mocked_item = MagicMock()
-        mocked_item.get_taxes = MagicMock(return_value=item_info.taxes)
-        mocked_item.quantity = item_info.quantity
-        mocked_item.price = item_info.price
+        mocked_item.taxed_price = item_info.taxes * item_info.quantity + item_info.quantity * item_info.price  # type: ignore
         basket.add_item(item=mocked_item)
 
     assert basket.get_final_price() == final_price

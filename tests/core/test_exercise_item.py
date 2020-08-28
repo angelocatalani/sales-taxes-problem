@@ -67,20 +67,17 @@ def test_exercise_item_init() -> None:
     """
     ex_item = ExerciseItem(name=ITEM_NAME, quantity=ITEM_QUANTITY, price=ITEM_PRICE)
     assert ex_item is not None
-    assert ex_item.name == ITEM_NAME
-    assert ex_item.price == ITEM_PRICE
-    assert ex_item.quantity == ITEM_QUANTITY
 
 
 @pytest.mark.parametrize(
     "item_info,expected_taxes",
     [
-        (ItemInfo(quantity=0, price=14.99, name="music"), 1.5),
+        (ItemInfo(quantity=0, price=14.99, name="music"), 0),
         (ItemInfo(quantity=1, price=14.99, name="music"), 1.5),
-        (ItemInfo(quantity=2, price=14.99, name="music"), 1.5),
-        (ItemInfo(quantity=2, price=14.99, name="music"), 1.5),
+        (ItemInfo(quantity=2, price=14.99, name="music"), 3.0),
+        (ItemInfo(quantity=2, price=14.99, name="music"), 3.0),
         (ItemInfo(quantity=2, price=14.99, name="chocolate bar"), 0),
-        (ItemInfo(quantity=2, price=10, name="imported box of chocolate"), 0.5),
+        (ItemInfo(quantity=2, price=10, name="imported box of chocolate"), 1.0),
     ],
 )  # type: ignore[misc]
 def test_exercise_item_get_taxes(item_info: ItemInfo, expected_taxes: float) -> None:
