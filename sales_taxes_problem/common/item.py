@@ -39,8 +39,8 @@ class Item(ABC):
         """
 
         return (
-                self._tax_calculator.compute_tax(item_name=self._name, item_price=self._price)
-                * self._quantity
+            self._tax_calculator.compute_tax(item_name=self._name, item_price=self._price)
+            * self._quantity
         )
 
     @property
@@ -56,8 +56,8 @@ class Item(ABC):
             return False
         other_item: Item = other
         ris = (
-                other_item._price == self._price
-                and other_item._quantity == self._quantity
-                and other_item._name == self._name
+            other_item._price == self._price
+            and other_item._quantity == self._quantity
+            and other_item._name == self._name
         )
         return ris
