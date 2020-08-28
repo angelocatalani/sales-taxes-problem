@@ -21,9 +21,7 @@ def test_exercise_parser_output_receipt(receipt_info: ReceiptInfo) -> None:
     """
 
     ex_parser = ExerciseParser()
-    # FIXME: implement ExerciseParser().output_receipt()
-    with pytest.raises(NotImplementedError):
-        assert ex_parser.output_receipt(baskets=receipt_info.baskets) == receipt_info.output_receipt
+    assert ex_parser.output_receipt(baskets=receipt_info.baskets) == receipt_info.output_receipt
 
 
 @pytest.mark.parametrize(
