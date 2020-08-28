@@ -33,6 +33,7 @@ def test_exercise_parser_parse_receipt(receipt_info: ReceiptInfo) -> None:
     """
 
     ex_parser = ExerciseParser()
-    # FIXME: implement ExerciseParser().parse_receipt()
-    with pytest.raises(NotImplementedError):
-        assert ex_parser.parse_receipt(receipt=receipt_info.receipt) == receipt_info.baskets
+    actual_baskets = ex_parser.parse_receipt(receipt=receipt_info.receipt)
+    assert len(actual_baskets) == len(receipt_info.baskets)
+    for i in range(len(actual_baskets)):
+        assert actual_baskets[i] == receipt_info.baskets[i]
