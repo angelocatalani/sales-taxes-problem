@@ -68,4 +68,5 @@ def load_test_receipts() -> Tuple[ReceiptInfo, ...]:
             )
             test_data.append(ri)
 
+    # return tuple(test_data)
     return tuple(test_data)

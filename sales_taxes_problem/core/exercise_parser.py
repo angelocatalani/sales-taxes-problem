@@ -13,4 +13,4 @@ class ExerciseParser(Parser):
         raise NotImplementedError()  # pragma: no cover
 
     def output_receipt(self, baskets: Tuple[Basket, ...]) -> str:
-        raise NotImplementedError()  # pragma: no cover
+        return "".join(str(b) for b in baskets)
