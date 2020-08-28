@@ -65,7 +65,7 @@ class ExerciseParser(Parser):
 
     @staticmethod
     def _build_basket_from_string_items(
-            basket_number: int, string_items: Tuple[str, ...]
+        basket_number: int, string_items: Tuple[str, ...]
     ) -> Basket:
         basket = Basket(number=basket_number)
         try:

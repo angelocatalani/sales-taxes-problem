@@ -50,11 +50,11 @@ def test_basket_get_total_taxes(items_info: List[ItemTaxInfo], total_taxes: int)
     [
         ([ItemTaxInfo(taxes=12, quantity=2, price=100)], 224.0),
         (
-                [
-                    ItemTaxInfo(taxes=12, quantity=2, price=123.35),
-                    ItemTaxInfo(taxes=12.35, quantity=1, price=50.75),
-                ],
-                333.80,
+            [
+                ItemTaxInfo(taxes=12, quantity=2, price=123.35),
+                ItemTaxInfo(taxes=12.35, quantity=1, price=50.75),
+            ],
+            333.80,
         ),
         ([], 0),
     ],
