@@ -52,7 +52,7 @@ def test_exercise_tax_calculator_round_up(amount: float, rounded: float) -> None
     ],
 )  # type: ignore[misc]
 def test_exercise_tax_calculator_compute_tax(
-    item_name: str, item_price: float, expected_tax: float
+        item_name: str, item_price: float, expected_tax: float
 ) -> None:
     """
     Test the taxes are correctly computed.
@@ -85,10 +85,10 @@ def test_exercise_item_get_taxes(item_info: ItemInfo, expected_taxes: float) -> 
     Test the taxes are correctly computed.
     """
     assert (
-        ExerciseItem(
-            name=item_info.name, quantity=item_info.quantity, price=item_info.price
-        ).get_taxes()
-        == expected_taxes
+            ExerciseItem(
+                name=item_info.name, quantity=item_info.quantity, price=item_info.price
+            ).get_taxes()
+            == expected_taxes
     )
 
 
@@ -96,16 +96,16 @@ def test_exercise_item_get_taxes(item_info: ItemInfo, expected_taxes: float) -> 
     "item_info,expected_format",
     [
         (
-            ItemInfo(quantity=0, price=47.50, name="imported bottle of perfume"),
-            "0 imported bottle of perfume: 0.00",
+                ItemInfo(quantity=0, price=47.50, name="imported bottle of perfume"),
+                "0 imported bottle of perfume: 0.00",
         ),
         (
-            ItemInfo(quantity=1, price=10.00, name="imported box of chocolates"),
-            "1 imported box of chocolates: 10.50",
+                ItemInfo(quantity=1, price=10.00, name="imported box of chocolates"),
+                "1 imported box of chocolates: 10.50",
         ),
         (
-            ItemInfo(quantity=1, price=47.50, name="imported bottle of perfume"),
-            "1 imported bottle of perfume: 54.65",
+                ItemInfo(quantity=1, price=47.50, name="imported bottle of perfume"),
+                "1 imported bottle of perfume: 54.65",
         ),
     ],
 )  # type: ignore[misc]
@@ -114,6 +114,6 @@ def test_exercise_item_format(item_info: ItemInfo, expected_format: str) -> None
     Test the ExerciseItem is correctly formatted,
     """
     assert (
-        f"{ExerciseItem(name=item_info.name, quantity=item_info.quantity, price=item_info.price)}"
-        == expected_format
+            f"{ExerciseItem(name=item_info.name, quantity=item_info.quantity, price=item_info.price)}"
+            == expected_format
     )

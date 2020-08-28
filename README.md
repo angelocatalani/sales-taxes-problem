@@ -150,6 +150,17 @@ The `ExerciseItem` is the concrete implementation of the`Item` under the exercis
 The `ExerciseTaxCalculator` is the concrete implementation of the `TaxCalculator`
 under the exercise taxation system.
 
+To compute the correct tax for a given `ExerciseItem`, `ExerciseTaxCalculator` uses
+a simple approach based on a known vocabulary of strings.
+To handle this classification problem more rigorously, it could be used a greater 
+dictionary stored on secondary storage or use some Machine Learning API.
+
+This means the computation of the correct tax could potentially require
+a significant latency due to IO access or network latency.
+
+This is the reason why the methods to get the correct tax (`_is_basic_taxable`, `_is_import_taxable`)
+are `cached` trough the usage of the `lru_cache` decorator.
+
 The `ExerciseParser` is the concrete implementation of the `Parser` that uses items of type:
 `ExerciseItems`and assumes the recipe format of the exercise.
 
