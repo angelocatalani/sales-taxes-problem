@@ -3,7 +3,7 @@ from typing import List, NamedTuple, Tuple
 
 from sales_taxes_problem.common.basket import Basket
 from sales_taxes_problem.common.parser import Parser
-from sales_taxes_problem.core import ExerciseItem
+from sales_taxes_problem.core import ExerciseItem, MalformedReceiptError
 
 
 class ItemArguments(NamedTuple):
@@ -25,12 +25,26 @@ class ExerciseParser(Parser):
     _ITEM_REGEX = re.compile("^(\d+) (.+) at (\d+.\d\d)$")
 
     def parse_receipt(self, receipt: str) -> Tuple[Basket, ...]:
+        """
+        Parse the input receipt into a tuple of Baskets.
+
+        :param receipt: the receipt's text
+        :raise MalformedReceiptError: if the receipt is not well formatted
+        """
         basket_strings = receipt.split("\n\n")
+        basket_filtered_strings = ExerciseParser._filter_invalid_baskets_string(basket_strings)
+
+        if len(basket_filtered_strings) == 0:
+            raise MalformedReceiptError(
+                message=r"the receipt must contain at least one basket with '\n\n' as separator"
+            )
+
         baskets = []
         basket_number = 1
-        for basket_string in basket_strings:
+
+        for basket_string in basket_filtered_strings:
             basket_info = basket_string.split("\n")
-            relevant_basket_info = ExerciseParser._filter_invalid_string(basket_info)
+            relevant_basket_info = ExerciseParser._filter_invalid_item_string(basket_info)
             basket = ExerciseParser._build_basket_from_string_items(
                 basket_number=basket_number, string_items=relevant_basket_info
             )
@@ -42,7 +56,11 @@ class ExerciseParser(Parser):
         return "".join(str(b) for b in baskets)
 
     @staticmethod
-    def _filter_invalid_string(strings: List[str]) -> Tuple[str, ...]:
+    def _filter_invalid_baskets_string(strings: List[str]) -> Tuple[str, ...]:
+        return tuple(filter(lambda s: len(s.strip()) > 0 and "Input" in s, strings))
+
+    @staticmethod
+    def _filter_invalid_item_string(strings: List[str]) -> Tuple[str, ...]:
         return tuple(filter(lambda s: len(s.strip()) > 0 and "Input" not in s, strings))
 
     @staticmethod
@@ -50,14 +68,19 @@ class ExerciseParser(Parser):
         basket_number: int, string_items: Tuple[str, ...]
     ) -> Basket:
         basket = Basket(number=basket_number)
-        for string_item in string_items:
-            item_arguments = ExerciseParser._get_item_arguments(string_item=string_item)
-            item = ExerciseItem(
-                quantity=item_arguments.quantity,
-                name=item_arguments.name,
-                price=item_arguments.price,
-            )
-            basket.add_item(item)
+        try:
+            for string_item in string_items:
+                item_arguments = ExerciseParser._get_item_arguments(string_item=string_item)
+                item = ExerciseItem(
+                    quantity=item_arguments.quantity,
+                    name=item_arguments.name,
+                    price=item_arguments.price,
+                )
+                basket.add_item(item)
+        except Exception as e:
+            raise MalformedReceiptError(
+                f"the string items: {string_items} are not valid `quantity`, `name`, `price` inputs for the ExerciseItem"
+            ) from e
         return basket
 
     @staticmethod

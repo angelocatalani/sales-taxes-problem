@@ -33,12 +33,9 @@ class ReceiptInfo(NamedTuple):
     output_receipt: str
 
 
-def load_test_receipts() -> Tuple[ReceiptInfo, ...]:
+def load_correct_receipts() -> Tuple[ReceiptInfo, ...]:
     """
-    Load the testing data from the receipts.json file
-    for the ExerciseParser.
-
-    :return: the test data
+    Load the well formatted receipts.
     """
 
     def _build_basket_from_items(number: int, item_list: List[Dict[str, Any]]) -> Basket:
@@ -51,7 +48,7 @@ def load_test_receipts() -> Tuple[ReceiptInfo, ...]:
         return basket
 
     test_data = []
-    with resources.open_text(tests.core.data, "receipts.json") as json_file:
+    with resources.open_text(tests.core.data, "correct_receipts.json") as json_file:
         data: Any = json.load(json_file)
         for receipt in data:
             basket_counter = 1
@@ -68,5 +65,17 @@ def load_test_receipts() -> Tuple[ReceiptInfo, ...]:
             )
             test_data.append(ri)
 
-    # return tuple(test_data)
+    return tuple(test_data)
+
+
+def load_malformed_receipts() -> Tuple[str, ...]:
+    """
+    Load the  malformed receipts.
+    """
+
+    test_data = []
+    with resources.open_text(tests.core.data, "malformed_receipts.json") as json_file:
+        data: Any = json.load(json_file)
+        for receipt in data:
+            test_data.append(receipt["input"])
     return tuple(test_data)
