@@ -5,8 +5,12 @@ from sales_taxes_problem.common.parser import Parser
 
 
 class ExerciseParser(Parser):
-    def deserialize_receipt(self, receipt_text: str) -> Tuple[Basket]:
+    """
+    Parser for the receipt format of this exercise.
+    """
+
+    def parse_receipt(self, receipt: str) -> Tuple[Basket]:
         raise NotImplementedError()  # pragma: no cover
 
-    def serialize_receipt(self, baskets: Tuple[Basket]) -> str:
+    def output_receipt(self, baskets: Tuple[Basket, ...]) -> str:
         raise NotImplementedError()  # pragma: no cover

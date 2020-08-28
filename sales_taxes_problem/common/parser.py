@@ -5,17 +5,24 @@ from sales_taxes_problem.common.basket import Basket
 
 
 class Parser(ABC):
+    """
+    Abstract Parser for the receipt.
+    """
+
     @abstractmethod
-    def deserialize_receipt(self, receipt_text: str) -> Tuple[Basket]:
+    def parse_receipt(self, receipt: str) -> Tuple[Basket]:
         """
-        Deserialize the text representing the receipt details into a tuple of Baskets.
+        Parse the input receipt into a tuple of Baskets.
+
+        :param receipt: the receipt's text
         """
         raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
-    def serialize_receipt(self, baskets: Tuple[Basket]) -> str:
+    def output_receipt(self, baskets: Tuple[Basket, ...]) -> str:
         """
-        Serialize the tuple of Baskets into the expected output.
+        Create the output receipt given the tuple of Baskets it contains.
+
         :param baskets: the tuple of Baskets
         :return: the receipt's output
         """
