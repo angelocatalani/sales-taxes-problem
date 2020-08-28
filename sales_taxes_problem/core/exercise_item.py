@@ -84,3 +84,6 @@ class ExerciseItem(Item):
     """
 
     _tax_calculator = ExerciseTaxCalculator()
+
+    def __str__(self) -> str:
+        return f"{self._quantity} {self._name}: {self.taxed_price:.2f}"

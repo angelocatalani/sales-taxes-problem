@@ -90,3 +90,30 @@ def test_exercise_item_get_taxes(item_info: ItemInfo, expected_taxes: float) -> 
         ).get_taxes()
         == expected_taxes
     )
+
+
+@pytest.mark.parametrize(
+    "item_info,expected_format",
+    [
+        (
+            ItemInfo(quantity=0, price=47.50, name="imported bottle of perfume"),
+            "0 imported bottle of perfume: 0.00",
+        ),
+        (
+            ItemInfo(quantity=1, price=10.00, name="imported box of chocolates"),
+            "1 imported box of chocolates: 10.50",
+        ),
+        (
+            ItemInfo(quantity=1, price=47.50, name="imported bottle of perfume"),
+            "1 imported bottle of perfume: 54.65",
+        ),
+    ],
+)  # type: ignore[misc]
+def test_exercise_item_format(item_info: ItemInfo, expected_format: str) -> None:
+    """
+    Test the ExerciseItem is correctly formatted,
+    """
+    assert (
+        f"{ExerciseItem(name=item_info.name, quantity=item_info.quantity, price=item_info.price)}"
+        == expected_format
+    )
