@@ -176,4 +176,3 @@ To contribute, please open a PR based on the `staging` branch, make sure that th
 and all the steps performed in the CI pipeline are completed successfully. 
 
 We follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).
-
