@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 from sales_taxes_problem.common.item import Item
 
@@ -54,3 +54,14 @@ class Basket:
         total = f"\nTotal: {self.get_final_price():.2f}\n"
 
         return f"{header}{items_to_string}{sales_taxes}{total}"
+
+    def __eq__(self, other: Any) -> bool:
+        if not type(other) is type(self):
+            return False
+        other_basket: Basket = other
+        if other_basket._number == self._number and len(other_basket._items) == len(self._items):
+            for i in range(len(other_basket._items)):
+                if other_basket._items[i] != self._items[i]:
+                    return False
+            return True
+        return False

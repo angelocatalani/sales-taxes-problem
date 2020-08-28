@@ -10,7 +10,7 @@ class Parser(ABC):
     """
 
     @abstractmethod
-    def parse_receipt(self, receipt: str) -> Tuple[Basket]:
+    def parse_receipt(self, receipt: str) -> Tuple[Basket, ...]:
         """
         Parse the input receipt into a tuple of Baskets.
 

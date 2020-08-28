@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 class TaxCalculator(ABC):
@@ -66,3 +67,14 @@ class Item(ABC):
         The taxed price is computed for the entire Item quantity.
         """
         return self.get_taxes() + self._price * self._quantity
+
+    def __eq__(self, other: Any) -> bool:
+        if not type(other) is type(self):
+            return False
+        other_item: Item = other
+        ris = (
+            other_item._price == self._price
+            and other_item._quantity == self._quantity
+            and other_item._name == self._name
+        )
+        return ris
