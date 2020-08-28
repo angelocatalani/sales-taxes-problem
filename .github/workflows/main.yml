@@ -1,4 +1,4 @@
-name: CI for sales-taxes-problem
+name: Build and Test
 
 on:
   push:
