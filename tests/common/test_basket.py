@@ -39,10 +39,10 @@ def test_basket_get_total_taxes(items_info: List[ItemTaxInfo], total_taxes: int)
     basket = Basket(number=BASKET_NUMBER)
     for item_info in items_info:
         mocked_item = MagicMock()
-        mocked_item.get_taxes = MagicMock(return_value=item_info.taxes * item_info.quantity)
+        mocked_item.taxes = item_info.taxes * item_info.quantity
         basket.add_item(item=mocked_item)
 
-    assert basket.get_total_taxes() == total_taxes
+    assert basket.total_taxes == total_taxes
 
 
 @pytest.mark.parametrize(
@@ -69,7 +69,7 @@ def test_basket_get_final_price(items_info: List[ItemTaxInfo], final_price: int)
         mocked_item.taxed_price = item_info.taxes * item_info.quantity + item_info.quantity * item_info.price  # type: ignore
         basket.add_item(item=mocked_item)
 
-    assert basket.get_final_price() == final_price
+    assert basket.final_price == final_price
 
 
 def test_basket_representation() -> None:
@@ -80,7 +80,7 @@ def test_basket_representation() -> None:
 
     mocked_item = MagicMock()
     mocked_item.taxed_price = ITEM_TAXED_PRICE
-    mocked_item.get_taxes = MagicMock(return_value=ITEM_TAXES)
+    mocked_item.taxes = ITEM_TAXES
     mocked_item.__str__ = MagicMock(return_value=ITEM_STRING_REPRESENTATION)
     basket.add_item(item=mocked_item)
 

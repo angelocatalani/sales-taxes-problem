@@ -31,22 +31,14 @@ class ExerciseParser(Parser):
         :param receipt: the receipt's text
         :raise MalformedReceiptError: if the receipt is not well formatted
         """
-        basket_strings = receipt.split("\n\n")
-        basket_filtered_strings = ExerciseParser._filter_invalid_baskets_string(basket_strings)
-
-        if len(basket_filtered_strings) == 0:
-            raise MalformedReceiptError(
-                message=r"the receipt must contain at least one basket with '\n\n' as separator"
-            )
+        basket_strings = ExerciseParser._get_basket_strings(receipt=receipt)
 
         baskets = []
         basket_number = 1
 
-        for basket_string in basket_filtered_strings:
-            basket_info = basket_string.split("\n")
-            relevant_basket_info = ExerciseParser._filter_invalid_item_string(basket_info)
-            basket = ExerciseParser._build_basket_from_string_items(
-                basket_number=basket_number, string_items=relevant_basket_info
+        for basket_string in basket_strings:
+            basket = ExerciseParser._build_basket_from_string(
+                basket_number=basket_number, basket_string=basket_string
             )
             baskets.append(basket)
             basket_number += 1
@@ -56,20 +48,27 @@ class ExerciseParser(Parser):
         return "".join(str(b) for b in baskets)
 
     @staticmethod
+    def _get_basket_strings(receipt: str) -> Tuple[str, ...]:
+        basket_strings = receipt.split("\n\n")
+        basket_filtered_strings = ExerciseParser._filter_invalid_baskets_string(basket_strings)
+
+        if len(basket_filtered_strings) == 0:
+            raise MalformedReceiptError(
+                message=r"the receipt must contain at least one basket with '\n\n' as separator"
+            )
+        return basket_filtered_strings
+
+    @staticmethod
     def _filter_invalid_baskets_string(strings: List[str]) -> Tuple[str, ...]:
         return tuple(filter(lambda s: len(s.strip()) > 0 and "Input" in s, strings))
 
     @staticmethod
-    def _filter_invalid_item_string(strings: List[str]) -> Tuple[str, ...]:
-        return tuple(filter(lambda s: len(s.strip()) > 0 and "Input" not in s, strings))
-
-    @staticmethod
-    def _build_basket_from_string_items(
-        basket_number: int, string_items: Tuple[str, ...]
-    ) -> Basket:
+    def _build_basket_from_string(basket_number: int, basket_string: str) -> Basket:
+        basket_info = basket_string.split("\n")
+        relevant_basket_info = ExerciseParser._filter_invalid_item_string(basket_info)
         basket = Basket(number=basket_number)
-        try:
-            for string_item in string_items:
+        for string_item in relevant_basket_info:
+            try:
                 item_arguments = ExerciseParser._get_item_arguments(string_item=string_item)
                 item = ExerciseItem(
                     quantity=item_arguments.quantity,
@@ -77,11 +76,15 @@ class ExerciseParser(Parser):
                     price=item_arguments.price,
                 )
                 basket.add_item(item)
-        except Exception as e:
-            raise MalformedReceiptError(
-                f"the string items: {string_items} are not valid `quantity`, `name`, `price` inputs for the ExerciseItem"
-            ) from e
+            except Exception as e:
+                raise MalformedReceiptError(
+                    f"the string item: {string_item} is not valid `quantity`, `name`, `price` inputs for the ExerciseItem"
+                ) from e
         return basket
+
+    @staticmethod
+    def _filter_invalid_item_string(strings: List[str]) -> Tuple[str, ...]:
+        return tuple(filter(lambda s: len(s.strip()) > 0 and "Input" not in s, strings))
 
     @staticmethod
     def _get_item_arguments(string_item: str) -> ItemArguments:

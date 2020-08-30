@@ -85,9 +85,7 @@ def test_exercise_item_get_taxes(item_info: ItemInfo, expected_taxes: float) -> 
     Test the taxes are correctly computed.
     """
     assert (
-        ExerciseItem(
-            name=item_info.name, quantity=item_info.quantity, price=item_info.price
-        ).get_taxes()
+        ExerciseItem(name=item_info.name, quantity=item_info.quantity, price=item_info.price).taxes
         == expected_taxes
     )
 
