@@ -6,7 +6,7 @@ from sales_taxes_problem.common.tax_calculator import TaxCalculator
 
 class Item(ABC):
     """
-    Represents the single Item inside a shopping basket.
+    Represent the single Item inside a shopping basket.
     """
 
     def __init__(self, quantity: int, name: str, price: float):
@@ -32,9 +32,10 @@ class Item(ABC):
         """
         raise NotImplementedError()  # pragma: no cover
 
-    def get_taxes(self) -> float:
+    @property
+    def taxes(self) -> float:
         """
-        Compute the taxes to pay for this Item rounded up to the nearest 0.05.
+        The taxes to pay for this Item rounded up to the nearest 0.05.
         The taxes are computes for the entire Item quantity.
         """
 
@@ -46,10 +47,10 @@ class Item(ABC):
     @property
     def taxed_price(self) -> float:
         """
-        Compute the taxed price for this Item.
+        The taxed price for this Item.
         The taxed price is computed for the entire Item quantity.
         """
-        return self.get_taxes() + self._price * self._quantity
+        return self.taxes + self._price * self._quantity
 
     def __eq__(self, other: Any) -> bool:
         if not type(other) is type(self):

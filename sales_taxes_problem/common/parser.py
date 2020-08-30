@@ -6,13 +6,13 @@ from sales_taxes_problem.common.basket import Basket
 
 class Parser(ABC):
     """
-    Abstract Parser for the receipt.
+    The Parser for a given receipt format.
     """
 
     @abstractmethod
     def parse_receipt(self, receipt: str) -> Tuple[Basket, ...]:
         """
-        Parse the input receipt into a tuple of Baskets.
+        Parse the receipt's text into a tuple of Baskets.
 
         :param receipt: the receipt's text
         """

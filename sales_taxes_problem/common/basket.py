@@ -25,20 +25,22 @@ class Basket:
         """
         self._items.append(item)
 
-    def get_total_taxes(self) -> float:
+    @property
+    def total_taxes(self) -> float:
         """
-        Get the taxes to pay for this Basket.
+        The taxes to pay for this Basket.
 
         :return: the taxes to pay
         """
         total_taxes = 0.0
         for item in self._items:
-            total_taxes += item.get_taxes()
+            total_taxes += item.taxes
         return total_taxes
 
-    def get_final_price(self) -> float:
+    @property
+    def final_price(self) -> float:
         """
-        Get the final price for this Basket.
+        The final price for this Basket.
 
         :return: the final price
         """
@@ -50,8 +52,8 @@ class Basket:
     def __str__(self) -> str:
         header = f"\nOutput {self._number}:\n"
         items_to_string = "\n".join(str(i) for i in self._items)
-        sales_taxes = f"\nSales Taxes: {self.get_total_taxes():.2f}"
-        total = f"\nTotal: {self.get_final_price():.2f}\n"
+        sales_taxes = f"\nSales Taxes: {self.total_taxes:.2f}"
+        total = f"\nTotal: {self.final_price:.2f}\n"
 
         return f"{header}{items_to_string}{sales_taxes}{total}"
 
