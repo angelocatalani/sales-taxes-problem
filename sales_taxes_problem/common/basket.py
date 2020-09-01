@@ -50,7 +50,7 @@ class Basket:
         return final_price
 
     def __str__(self) -> str:
-        header = f"\nOutput {self._number}:\n"
+        header = f"Output {self._number}:\n"
         items_to_string = "\n".join(str(i) for i in self._items)
         sales_taxes = f"\nSales Taxes: {self.total_taxes:.2f}"
         total = f"\nTotal: {self.final_price:.2f}\n"

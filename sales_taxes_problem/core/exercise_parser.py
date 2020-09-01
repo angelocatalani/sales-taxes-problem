@@ -22,7 +22,10 @@ class ExerciseParser(Parser):
     """
 
     # the regex to get the parameters for the ExerciseItem
-    _ITEM_REGEX = re.compile("^(\d+) (.+) at (\d+.\d\d)$")
+    _ITEM_QUANTITY = r"(\d+)"
+    _ITEM_NAME = r"(.+)"
+    _ITEM_PRICE = r"(\d+.\d\d)"
+    _ITEM_REGEX = re.compile(f"^{_ITEM_QUANTITY} {_ITEM_NAME} at {_ITEM_PRICE}$")
 
     def parse_receipt(self, receipt: str) -> Tuple[Basket, ...]:
         """
@@ -45,18 +48,23 @@ class ExerciseParser(Parser):
         return tuple(baskets)
 
     def output_receipt(self, baskets: Tuple[Basket, ...]) -> str:
-        return "".join(str(b) for b in baskets)
+        return "\n".join(str(b) for b in baskets)
 
     @staticmethod
     def _get_basket_strings(receipt: str) -> Tuple[str, ...]:
-        basket_strings = receipt.split("\n\n")
-        basket_filtered_strings = ExerciseParser._filter_invalid_baskets_string(basket_strings)
 
-        if len(basket_filtered_strings) == 0:
-            raise MalformedReceiptError(
-                message=r"the receipt must contain at least one basket with '\n\n' as separator"
-            )
-        return basket_filtered_strings
+        basket_strings = receipt.split("\n\n")
+        for basket_string in basket_strings:
+            if not ExerciseParser._is_valid_basket(basket_string):
+                raise MalformedReceiptError(
+                    f"the basket:{basket_string} is not formatted correctly"
+                )
+        return tuple(basket_strings)
+
+    @staticmethod
+    def _is_valid_basket(basket_string: str) -> bool:
+        # FIXME: use regex
+        return "Input" in basket_string
 
     @staticmethod
     def _filter_invalid_baskets_string(strings: List[str]) -> Tuple[str, ...]:
