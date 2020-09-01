@@ -44,7 +44,7 @@ def test_exercise_parser_parse_receipt(receipt_info: ReceiptInfo) -> None:
 )  # type: ignore[misc]
 def test_exercise_parser_raise_exception(malformed_receipt: str) -> None:
     """
-    Test the receipt is converted to the correct Baskets.
+    Test the MalformedReceiptError is raised when the receipt is malformed.
     """
 
     ex_parser = ExerciseParser()

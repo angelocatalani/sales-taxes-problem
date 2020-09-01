@@ -109,7 +109,7 @@ def test_exercise_item_get_taxes(item_info: ItemInfo, expected_taxes: float) -> 
 )  # type: ignore[misc]
 def test_exercise_item_format(item_info: ItemInfo, expected_format: str) -> None:
     """
-    Test the ExerciseItem is correctly formatted,
+    Test the ExerciseItem is correctly formatted.
     """
     assert (
         f"{ExerciseItem(name=item_info.name, quantity=item_info.quantity, price=item_info.price)}"
