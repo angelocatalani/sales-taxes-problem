@@ -110,7 +110,7 @@ The ```[price] ``` is cumulative for the given ```[item]```
 and rounded up to the nearest 0.05.
 
 #### Class Diagram
-The `Item` interface abstracts the single item inside a shopping basket.
+The `Item` abstract class abstracts the single item inside a shopping basket.
 
 The `Item`'s state is defined by:
 - the quantity
@@ -121,9 +121,9 @@ The `Item` is in charge of:
 - computing the tax to pay
 
 To make the `Item` resilient to tax rate changes and flexible to new taxes,
-the tax computation is delegated to the `TaxCalculator` interface.
+the tax computation is delegated to the `TaxCalculator` abstract class.
 
-The `TaxCalculator` interface is in charge of:
+The `TaxCalculator` abstract class is in charge of:
 - classifying the item
 - computing the tax for that item
 
@@ -139,11 +139,15 @@ The `Basket` is in charge of:
 - computing the total taxes for all the basket's items
 - representing the Basket following the exercise recipe output
 
-The `Parser` is an interface that is in charge of:
-- deserializing the text representing the receipt details into a tuple of `Bakset`
-- serializing the tuple of `Basket` into the expected output.
-We decided to make it abstract because so that the code is resilient 
-to changes in the recipe text format.
+The `Receipt` is an abstract class that is in charge of:
+- computing the receipt's details given the text representation of the shopping `Baskets`.
+
+The `Receipt` implements the factory design pattern with the abstract method: `create_basket`.
+In this way if we need to parse another format of baskets, we just need to implement that method.
+The `Receipt` exposes also the public property `basket_strings` so that the concrete
+class can eventually override how the baskets can be split from the input text.
+
+The `ExerciseReceipt` is the concrete implementation of the `Receipt`.
 
 The `ExerciseItem` is the concrete implementation of the`Item` under the exercise taxation system.
 
@@ -161,8 +165,6 @@ a significant latency due to IO access or network latency.
 This is the reason why the methods to get the correct tax (`_is_basic_taxable`, `_is_import_taxable`)
 are `cached` trough the usage of the `lru_cache` decorator.
 
-The `ExerciseParser` is the concrete implementation of the `Parser` that uses items of type:
-`ExerciseItems`and assumes the recipe format of the exercise.
 
 ### Installation
 To install and configure `poetry` run 
