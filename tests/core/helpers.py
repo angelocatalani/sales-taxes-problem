@@ -1,10 +1,8 @@
 import json
 from importlib import resources
-from typing import Any, Dict, List, NamedTuple, Tuple
+from typing import Any, NamedTuple, Tuple
 
 import tests.core.data
-from sales_taxes_problem.common.basket import Basket
-from sales_taxes_problem.core import ExerciseItem
 
 BASKET_NUMBER = 1
 
@@ -28,54 +26,35 @@ class ReceiptInfo(NamedTuple):
     Auxiliary data structure to test the ExerciseParser.
     """
 
-    receipt: str
-    baskets: Tuple[Basket, ...]
+    baskets: str
     output_receipt: str
 
 
-def load_correct_receipts() -> Tuple[ReceiptInfo, ...]:
-    """
-    Load the well formatted receipts.
-    """
+def load_data(file: str) -> Any:
+    with resources.open_text(tests.core.data, file) as json_file:
+        return json.load(json_file)
 
-    def _build_basket_from_items(number: int, item_list: List[Dict[str, Any]]) -> Basket:
-        basket = Basket(number=number)
-        for item in item_list:
-            deserialized_item = ExerciseItem(
-                quantity=item["quantity"], name=item["name"], price=item["price"]
-            )
-            basket.add_item(item=deserialized_item)
-        return basket
+
+def load_correct_baskets() -> Tuple[ReceiptInfo, ...]:
+    """
+    Load the correct baskets.
+    """
 
     test_data = []
-    with resources.open_text(tests.core.data, "correct_receipts.json") as json_file:
-        data: Any = json.load(json_file)
-        for receipt in data:
-            basket_counter = 1
-            input_receipt = receipt["input"]
-            output_receipt = receipt["output"]
-            items = receipt["items"]
-            baskets = []
-            for item_list in items:
-                basket = _build_basket_from_items(number=basket_counter, item_list=item_list)
-                baskets.append(basket)
-                basket_counter += 1
-            ri = ReceiptInfo(
-                receipt=input_receipt, baskets=tuple(baskets), output_receipt=output_receipt
-            )
-            test_data.append(ri)
-
+    data = load_data("correct_baskets.json")
+    for receipt in data:
+        ri = ReceiptInfo(baskets=receipt["input"], output_receipt=receipt["output"])
+        test_data.append(ri)
     return tuple(test_data)
 
 
-def load_malformed_receipts() -> Tuple[str, ...]:
+def load_malformed_baskets() -> Tuple[str, ...]:
     """
-    Load the  malformed receipts.
+    Load the  malformed baskets.
     """
 
     test_data = []
-    with resources.open_text(tests.core.data, "malformed_receipts.json") as json_file:
-        data: Any = json.load(json_file)
-        for receipt in data:
-            test_data.append(receipt["input"])
+    data = load_data("malformed_baskets.json")
+    for receipt in data:
+        test_data.append(receipt["input"])
     return tuple(test_data)
