@@ -1,6 +1,6 @@
-class MalformedReceiptError(RuntimeError):
+class MalformedBasketError(RuntimeError):
     """
-    The input Receipt is not well formatted.
+    The Baskets strings are malformed.
     """
 
     def __init__(self, message: str):
