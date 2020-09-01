@@ -34,7 +34,7 @@ class ExerciseReceipt(Receipt):
     # the regex to get the input parameters for the ExerciseItem
     _ITEM_REGEX = re.compile(f"^{_ITEM_QUANTITY} {_ITEM_NAME} at {_ITEM_PRICE}$")
 
-    # the regex to get the Bakset number
+    # the regex to get the Basket number
     _INPUT_REGEX = re.compile(f"^{_INPUT}$")
 
     def create_basket(self, basket_string: str) -> Basket:
