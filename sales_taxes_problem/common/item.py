@@ -5,7 +5,7 @@ from sales_taxes_problem.common.tax_calculator import TaxCalculator
 
 class Item(ABC):
     """
-    Represent the single Item inside a shopping basket.
+    The single Item inside a shopping Basket.
     """
 
     def __init__(self, quantity: int, name: str, price: float):

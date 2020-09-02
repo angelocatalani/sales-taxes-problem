@@ -4,7 +4,6 @@ This is the main entry point for the Sales Taxes Problem
 from sales_taxes_problem.core import ExerciseReceipt
 
 if __name__ == "__main__":
-
     BASKETS = """Input 1:
 2 book at 12.49
 1 music CD at 14.99

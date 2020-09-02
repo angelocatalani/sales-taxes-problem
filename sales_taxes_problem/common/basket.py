@@ -5,14 +5,14 @@ from sales_taxes_problem.common.item import Item
 
 class Basket:
     """
-    Represents the shopping Basket.
+    The shopping Basket.
     """
 
     def __init__(self, number: int):
         """
-        Initialize the shopping Basket.
+        Initialize the shopping Basket with the Basket number.
 
-        :param number: the basket number
+        :param number: the Basket number
         """
         self._items: List[Item] = []
         self._number = number
