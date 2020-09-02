@@ -6,20 +6,20 @@ from sales_taxes_problem.common.basket import Basket
 
 class Receipt(ABC):
     """
-    The representation of a collection of Baskets.
-    It implements the factory design pattern.
+    The collection of shopping Baskets.
+    Adopted the Factory design pattern to create Baskets from strings.
     """
 
     def __init__(self, baskets: str):
         """
-        Initialize the Receipt with the string representing multiple Baskets.
+        Initialize the Receipt with the string representation of multiple Baskets.
 
         :param baskets: the string representation of a Basket collection
         """
         self._baskets = baskets
 
     @property
-    def basket_strings(self) -> Tuple[str, ...]:
+    def _basket_strings(self) -> Tuple[str, ...]:
         """
         The tuple of Basket strings inside the Receipt.
         """
@@ -33,7 +33,7 @@ class Receipt(ABC):
         :return: the Receipt details
         """
         baskets = []
-        for basket_string in self.basket_strings:
+        for basket_string in self._basket_strings:
             basket = self.create_basket(basket_string=basket_string)
             baskets.append(basket)
         return "\n".join(str(b) for b in baskets)

@@ -144,8 +144,8 @@ The `Receipt` is an abstract class that is in charge of:
 
 The `Receipt` implements the factory design pattern with the abstract method: `create_basket`.
 In this way if we need to parse another format of baskets, we just need to implement that method.
-The `Receipt` exposes also the public property `basket_strings` so that the concrete
-class can eventually override how the baskets can be split from the input text.
+The `Receipt` exposes also the protected property `_basket_strings` so that the concrete
+class can eventually override how the basket strings can be split from the input text.
 
 The `ExerciseReceipt` is the concrete implementation of the `Receipt`.
 
@@ -167,22 +167,48 @@ are `cached` trough the usage of the `lru_cache` decorator.
 
 
 ### Installation
-To install and configure `poetry` run 
+First install and configure `poetry` run 
 ```shell script
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 poetry config virtualenvs.in-project true
 ```
 
+The clone the repository:
+```shell script
+git clone git@github.com:anjelo95/sales-taxes-problem.git
+```
+and change directory:
+```shell script
+cd sales-taxes-problem
+```
+ 
 Then, install dependencies:
 ```shell script
 poetry install
 ```
 
 ### Usage
-To run tests:
+Once you are in the folder: ```sales-taxes-problem/```:
+
+- run tests:
 ```shell script
 poetry run pytest
 ```
+
+- run main entry point:
+```shell script
+poetry run python sales_taxes_problem/main.py
+```
+
+By default the main entry point produces the Receipt details for the exercise shopping Baskets.
+
+You can create your own file with the shopping Baskets (e.g `my_baskets.txt`) and get the Receipt details:
+```shell script
+echo "Input 1:\n2 book at 12.23">my_baskets.txt
+
+poetry run python sales_taxes_problem/main.py -b my_baskets.txt
+```
+
 
 ### Contributing
 To contribute, please open a PR based on the `staging` branch, make sure that the new code is properly tested 

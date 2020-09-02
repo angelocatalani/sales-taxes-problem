@@ -4,7 +4,7 @@ from sales_taxes_problem.core.exercise_tax_calculator import ExerciseTaxCalculat
 
 class ExerciseItem(Item):
     """
-    Represents the Item under this exercise taxation system.
+    The concrete Item under this exercise taxation system.
     """
 
     _tax_calculator = ExerciseTaxCalculator()
