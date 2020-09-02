@@ -18,6 +18,9 @@
     "input": "\nInput 1.1:\n2 book at 12.49"
   },
   {
+    "input": "\nInput 1:\n2 book at -12.49"
+  },
+  {
     "input": "\nInput 1:\n-2 book at 12.49"
   },
   {
