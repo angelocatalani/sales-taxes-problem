@@ -19,7 +19,7 @@ class Receipt(ABC):
         self._baskets = baskets
 
     @property
-    def basket_strings(self) -> Tuple[str, ...]:
+    def _basket_strings(self) -> Tuple[str, ...]:
         """
         The tuple of Basket strings inside the Receipt.
         """
@@ -33,7 +33,7 @@ class Receipt(ABC):
         :return: the Receipt details
         """
         baskets = []
-        for basket_string in self.basket_strings:
+        for basket_string in self._basket_strings:
             basket = self.create_basket(basket_string=basket_string)
             baskets.append(basket)
         return "\n".join(str(b) for b in baskets)

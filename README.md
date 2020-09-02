@@ -144,8 +144,8 @@ The `Receipt` is an abstract class that is in charge of:
 
 The `Receipt` implements the factory design pattern with the abstract method: `create_basket`.
 In this way if we need to parse another format of baskets, we just need to implement that method.
-The `Receipt` exposes also the public property `basket_strings` so that the concrete
-class can eventually override how the baskets can be split from the input text.
+The `Receipt` exposes also the protected property `_basket_strings` so that the concrete
+class can eventually override how the basket strings can be split from the input text.
 
 The `ExerciseReceipt` is the concrete implementation of the `Receipt`.
 
