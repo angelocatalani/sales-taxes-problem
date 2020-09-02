@@ -28,7 +28,7 @@ class BasketInfo(NamedTuple):
 class ExerciseReceipt(Receipt):
     _ITEM_QUANTITY = r"([0-9]+)"
     _ITEM_NAME = r"(.+)"
-    _ITEM_PRICE = r"(\d+.\d\d)"
+    _ITEM_PRICE = r"([0-9]+.\d\d)"
     _INPUT = r"Input ([0-9]+):"
 
     # the regex to get the input parameters for the ExerciseItem
@@ -79,7 +79,7 @@ class ExerciseReceipt(Receipt):
             quantity, name, price = ExerciseReceipt._ITEM_REGEX.findall(string_item)[0]
         except (IndexError, TypeError) as ie:
             raise MalformedBasketError(
-                f"the string_item: {string_item} must be: `[quantity] [name] at [price]`"
+                f"the string_item: `{string_item}` must be: `[integer quantity] [name] at [price with cents]`"
             ) from ie
         if float(price) < 0:
             raise MalformedBasketError(f"the string_item: {string_item} must have a positive price")
