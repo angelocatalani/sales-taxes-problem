@@ -81,8 +81,6 @@ class ExerciseReceipt(Receipt):
             raise MalformedBasketError(
                 f"the string_item: `{string_item}` must be: `[integer quantity] [name] at [price with cents]`"
             ) from ie
-        if float(price) < 0:
-            raise MalformedBasketError(f"the string_item: {string_item} must have a positive price")
 
         name = ExerciseReceipt._format_item_name(name=name)
         return ItemArguments(quantity=int(quantity), name=name, price=float(price))

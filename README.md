@@ -190,16 +190,15 @@ poetry install
 ### Usage
 Once you are in the folder: ```sales-taxes-problem/```:
 
-- run tests:
+- run verbose tests with code coverage:
 ```shell script
-poetry run pytest
+poetry run pytest -v --cov='sales_taxes_problem/'
 ```
 
 - run main entry point:
 ```shell script
 poetry run python sales_taxes_problem/main.py
 ```
-
 By default the main entry point produces the Receipt details for the exercise shopping Baskets.
 
 You can create your own file with the shopping Baskets (e.g `my_baskets.txt`) and get the Receipt details:
