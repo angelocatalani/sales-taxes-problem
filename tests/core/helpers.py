@@ -37,7 +37,7 @@ def load_data(file: str) -> Any:
 
 def load_correct_baskets() -> Tuple[ReceiptInfo, ...]:
     """
-    Load the correct baskets.
+    Load the correct Baskets.
     """
 
     test_data = []
@@ -50,7 +50,7 @@ def load_correct_baskets() -> Tuple[ReceiptInfo, ...]:
 
 def load_malformed_baskets() -> Tuple[str, ...]:
     """
-    Load the  malformed baskets.
+    Load the  malformed Baskets.
     """
 
     test_data = []

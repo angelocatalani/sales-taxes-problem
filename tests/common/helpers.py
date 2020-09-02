@@ -9,7 +9,7 @@ EXPECTED_BASKET_FORMAT = f"Output 1:\n{ITEM_STRING_REPRESENTATION}\nSales Taxes:
 
 class ItemTaxInfo(NamedTuple):
     """
-    Internal state of the Item for testing the basket.
+    Internal state of the Item for testing the Basket.
     """
 
     quantity: int
