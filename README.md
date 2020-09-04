@@ -4,6 +4,7 @@
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Actions Status](https://github.com/anjelo95/sales-taxes-problem/workflows/Build%20and%20Test/badge.svg)](https://github.com/anjelo95/sales-taxes-problem/actions)
+[![codecov](https://codecov.io/gh/anjelo95/sales-taxes-problem/branch/master/graph/badge.svg)](https://codecov.io/gh/anjelo95/sales-taxes-problem)
 
 This problem requires some kind of input. You are free to implement any mechanism for feeding input into your solution (for example, using hard coded data within a unit test). You should provide sufficient evidence that your solution is complete by, as a minimum, indicating that it works correctly against the supplied test data.
 
