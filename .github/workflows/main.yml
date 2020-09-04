@@ -54,5 +54,16 @@ jobs:
         run: poetry run isort -c
 
       - name: Run Pytest with coverage threshold
-        run: poetry run pytest --cov-fail-under=90 --cov=./sales_taxes_problem
-      
+        run: |
+         poetry run pytest --cov-fail-under=90 --cov=./sales_taxes_problem \
+         --cov-report=xml:test-reports/coverage.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+          directory: ./test-reports/
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          path_to_write_report: ./coverage/codecov_report.gz
